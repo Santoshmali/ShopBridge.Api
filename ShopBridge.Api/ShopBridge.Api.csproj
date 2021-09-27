@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopBridge.Core\ShopBridge.Core.csproj" />
+    <ProjectReference Include="..\ShopBridge.Data\ShopBridge.Data.csproj" />
+    <ProjectReference Include="..\ShopBridge.Services\ShopBridge.Services.csproj" />
   </ItemGroup>
 
 </Project>
