@@ -13,5 +13,6 @@ namespace ShopBridge.Services.Catalog
     public interface IProductService
     {
         Task<Product> GetProductByProductId(int id);
+        Task<Product> Insert(Product product);
     }
 }

@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ShopBridge.Api.Configurations;
 using ShopBridge.Data;
+using ShopBridge.Data.Catalog;
 using ShopBridge.Data.Context;
 using ShopBridge.Data.Repositories;
 using ShopBridge.Services.Catalog;
@@ -34,8 +36,15 @@ namespace ShopBridge.Api
             //services.AddDbContext<ShopBridgeDbContext>(options => options.UseSqlServer(Configuration["Database:ConnectionString"]));
             services.AddDbContext<ShopBridgeDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
             services.AddTransient<IDbContext, ShopBridgeDbContext>();
+            
+            // Repositories
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IProductRepository, ProductRepository>();
+
+            // Services
             services.AddTransient<IProductService, ProductService>();
+
+            services.AddAutoMapper(typeof(AutoMapperConfigurations));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

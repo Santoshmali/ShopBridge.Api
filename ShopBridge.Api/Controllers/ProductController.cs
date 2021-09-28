@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ShopBridge.Api.Models.Catalog;
+using ShopBridge.Core.Entities.Catalog;
+using ShopBridge.Core.Extensions;
 using ShopBridge.Services.Catalog;
 using System;
 using System.Collections.Generic;
@@ -21,25 +24,16 @@ namespace ShopBridge.Api.Controllers
 
         [HttpGet]
         [Route("/{id}")]
-        public async Task<ActionResult<ProductModel>> Get(int id)
+        public async Task<Product> Get(int id)
         {
-            var product =  await _productService.GetProductByProductId(id);
-            return null;
+            return  await _productService.GetProductByProductId(id);
         }
 
         [HttpPost]
-        public async Task<ProductModel> CreateProduct(ProductModel productModel)
+        public async Task<Product> CreateProduct(Product product)
         {
-            var product = new ProductModel
-            {
-                Name = "Name",
-                Description = "Desc",
-                Price = 99.99m
-            };
-
-            //var product1= await _productService.Insert(new Core.Catalog.Product());
-
-            return new ProductModel();
+            product.ThrowIfNull(nameof(product));
+            return await _productService.Insert(product);
         }
     }
 }
