@@ -29,11 +29,26 @@ namespace ShopBridge.Api.Controllers
             return  await _productService.GetProductByProductId(id);
         }
 
+        [HttpGet]
+        public async Task<List<Product>> GetAll()
+        {
+            return await _productService.GetAll();
+        }
+
+        [HttpGet]
+        [Route("/search/{searchtext}")]
+        public async Task<List<Product>> Search(string searchtext)
+        {
+            return await _productService.GetAll(searchtext);
+        }
+
         [HttpPost]
         public async Task<Product> CreateProduct(Product product)
         {
             product.ThrowIfNull(nameof(product));
             return await _productService.Insert(product);
         }
+
+
     }
 }

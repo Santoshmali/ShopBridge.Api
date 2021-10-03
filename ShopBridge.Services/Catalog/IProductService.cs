@@ -14,5 +14,6 @@ namespace ShopBridge.Services.Catalog
     {
         Task<Product> GetProductByProductId(int id);
         Task<Product> Insert(Product product);
+        Task<List<Product>> GetAll(string searchtext = "");
     }
 }

@@ -10,9 +10,9 @@ namespace ShopBridge.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private IDbContext _context;
+        private ShopBridgeDbContext _context;
 
-        public Repository(IDbContext context)
+        public Repository(ShopBridgeDbContext context)
         {
             _context = context;
         }

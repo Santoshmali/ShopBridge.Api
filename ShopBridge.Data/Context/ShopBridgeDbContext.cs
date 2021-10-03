@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShopBridge.Data.Context
 {
-    public class ShopBridgeDbContext : DbContext, IDbContext
+    public class ShopBridgeDbContext : DbContext
     {
-        public ShopBridgeDbContext()
-        {
-        }
+        //public ShopBridgeDbContext()
+        //{
+        //}
+
+        public DbSet<Products> Products { get; set; }
 
         public ShopBridgeDbContext(DbContextOptions<ShopBridgeDbContext> options)
             : base(options)
@@ -20,14 +22,14 @@ namespace ShopBridge.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Products>().ToTable("ShopBridgeProduct");
-            modelBuilder.Entity<Products>().HasKey(x => x.ProductId);
+            modelBuilder.Entity<Products>().HasKey(x => x.Id);
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public new DbSet<TEntity> Set<TEntity>() where TEntity : class
-        {
-            return base.Set<TEntity>();
-        }
+        //public new DbSet<TEntity> Set<TEntity>() where TEntity : class
+        //{
+        //    return base.Set<TEntity>();
+        //}
     }
 }

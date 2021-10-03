@@ -26,6 +26,12 @@ namespace ShopBridge.Services.Catalog
             _mapper = mapper.ThrowIfNull(nameof(mapper));
         }
 
+        public async Task<List<Product>> GetAll(string searchtext = "")
+        {
+            var list = await  _productRepository.GetAllAsync(searchtext);
+            return _mapper.Map<List<Product>>(list);
+        }
+
         public async Task<Product> GetProductByProductId(int id)
         {
             var products = await _productRepository.GetProductByProductId(id);
@@ -37,6 +43,6 @@ namespace ShopBridge.Services.Catalog
             product.ThrowIfNull(nameof(product));
             var products = await _productRepository.Insert(_mapper.Map<Products>(product));
             return _mapper.Map<Product>(products);
-        }
+        }        
     }
 }

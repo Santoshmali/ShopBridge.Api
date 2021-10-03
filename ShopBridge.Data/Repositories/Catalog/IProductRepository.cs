@@ -11,5 +11,6 @@ namespace ShopBridge.Data.Catalog
     public interface IProductRepository : IRepository<Products>
     {
         Task<Products> GetProductByProductId(int id);
+        Task<List<Products>> GetAllAsync(string searchtext);
     }
 }
