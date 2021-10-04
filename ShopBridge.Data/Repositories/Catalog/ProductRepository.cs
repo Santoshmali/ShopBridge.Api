@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ShopBridge.Data.Catalog
 {
-    public class ProductRepository : Repository<Products>, IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
         public ProductRepository(ShopBridgeDbContext context) : base(context)
         {
         }
 
-        public async Task<Products> GetProductByProductId(int id)
+        public async Task<Product> GetProductByProductId(int id)
         {
             return await this.Table.FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -26,7 +26,7 @@ namespace ShopBridge.Data.Catalog
         /// </summary>
         /// <param name="searchtext"></param>
         /// <returns></returns>
-        public async Task<List<Products>> GetAllAsync(string searchtext)
+        public async Task<List<Product>> GetAllAsync(string searchtext)
         {
             // We cannot use x.Name.Contains(searchtext), as Contains function is in the string class 
             // and cannot be translated to SQL query by the linq provider

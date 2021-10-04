@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ShopBridge.Data.Catalog
 {
-    public interface IProductRepository : IRepository<Products>
+    public interface IProductRepository : IRepository<Product>
     {
-        Task<Products> GetProductByProductId(int id);
-        Task<List<Products>> GetAllAsync(string searchtext);
+        Task<Product> GetProductByProductId(int id);
+        Task<List<Product>> GetAllAsync(string searchtext);
     }
 }

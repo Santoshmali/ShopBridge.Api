@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
 using Microsoft.OpenApi.Models;
 using ShopBridge.Api.Configurations;
+using ShopBridge.Api.Validators;
 using ShopBridge.Data;
 using ShopBridge.Data.Catalog;
 using ShopBridge.Data.Context;
@@ -35,14 +37,20 @@ namespace ShopBridge.Api
         {
             services.AddDbContext<ShopBridgeDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ShopBridgeConnectionString")));
             //services.AddDbContext<ShopBridgeDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
-            //services.AddTransient<IDbContext, ShopBridgeDbContext>();
             
             // Repositories
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IProductRepository, ProductRepository>();
 
+            //
+            services.AddFeatureManagement();
+
             // Services
             services.AddTransient<IProductService, ProductService>();
+
+            services.AddMvcCore(options => {
+                options.Filters.Add(typeof(ValidateModelFilter));
+            });
 
             services.AddAutoMapper(typeof(AutoMapperConfigurations));
 

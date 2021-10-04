@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopBridge.Data.DbModels.Catalog
+namespace ShopBridge.Core.DataModels.Catalog
 {
-    public class Products : ModelBase
+    public class ProductUpdateRequest
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Details { get; set; }
@@ -17,7 +18,5 @@ namespace ShopBridge.Data.DbModels.Catalog
         public bool IsDownloadable { get; set; }
         public bool IsShipEnabled { get; set; }
         public bool IsActive { get; set; }
-        public DateTime AddedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
     }
 }

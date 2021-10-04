@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using ShopBridge.Core.Entities.Catalog;
+using ShopBridge.Core.DataModels;
+using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Core.Extensions;
-using ShopBridge.Data;
 using ShopBridge.Data.Catalog;
-using ShopBridge.Data.Context;
 using ShopBridge.Data.DbModels.Catalog;
-using ShopBridge.Data.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ShopBridge.Services.Catalog
@@ -26,23 +21,32 @@ namespace ShopBridge.Services.Catalog
             _mapper = mapper.ThrowIfNull(nameof(mapper));
         }
 
-        public async Task<List<Product>> GetAll(string searchtext = "")
+        public async Task<ServiceResponse<List<ProductModel>>> GetAllAsync(string searchtext = "")
         {
-            var list = await  _productRepository.GetAllAsync(searchtext);
-            return _mapper.Map<List<Product>>(list);
+            var product = await  _productRepository.GetAllAsync(searchtext);
+            var productModelList =  _mapper.Map<List<ProductModel>>(product);
+            return new ServiceResponse<List<ProductModel>>(HttpStatusCode.OK, _mapper.Map<List<ProductModel>>(productModelList));
         }
 
-        public async Task<Product> GetProductByProductId(int id)
+        public async Task<ServiceResponse<ProductModel>> GetProductByProductIdAsync(int id)
         {
-            var products = await _productRepository.GetProductByProductId(id);
-            return _mapper.Map<Product>(products);
+            var product = await _productRepository.GetProductByProductId(id);          
+            var productModel = _mapper.Map<ProductModel>(product);
+
+            if (productModel.IsNull())
+            {
+                return new ServiceResponse<ProductModel>(HttpStatusCode.NotFound, null);
+            }
+            return new ServiceResponse<ProductModel>(HttpStatusCode.OK, _mapper.Map<ProductModel>(productModel));
         }
 
-        public async Task<Product> Insert(Product product)
+        public async Task<ServiceResponse<ProductModel>> InsertAsync(ProductCreateRequest productCreateRequest)
         {
-            product.ThrowIfNull(nameof(product));
-            var products = await _productRepository.Insert(_mapper.Map<Products>(product));
-            return _mapper.Map<Product>(products);
+            productCreateRequest.ThrowIfNull(nameof(productCreateRequest));
+            var product = await _productRepository.Insert(_mapper.Map<Product>(productCreateRequest));
+            var productModel = _mapper.Map<ProductModel>(product);
+
+            return new ServiceResponse<ProductModel>(HttpStatusCode.OK, _mapper.Map<ProductModel>(productModel));
         }        
     }
 }

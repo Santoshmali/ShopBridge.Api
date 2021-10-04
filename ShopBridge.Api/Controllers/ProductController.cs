@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ShopBridge.Api.Models.Catalog;
-using ShopBridge.Core.Entities.Catalog;
-using ShopBridge.Core.Extensions;
+using Microsoft.FeatureManagement;
+using ShopBridge.Core;
+using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Services.Catalog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ShopBridge.Api.Controllers
@@ -16,39 +14,55 @@ namespace ShopBridge.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IFeatureManager _featureManager;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IFeatureManager featureManager)
         {
             _productService = productService;
+            _featureManager = featureManager;
         }
 
         [HttpGet]
         [Route("/{id}")]
-        public async Task<Product> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return  await _productService.GetProductByProductId(id);
+            var response = await _productService.GetProductByProductIdAsync(id);
+            return StatusCode(response.HttpStatusCode, response);
         }
 
         [HttpGet]
-        public async Task<List<Product>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return await _productService.GetAll();
+            return await GetProducts();
         }
 
         [HttpGet]
         [Route("/search/{searchtext}")]
-        public async Task<List<Product>> Search(string searchtext)
+        public async Task<IActionResult> Search(string searchtext)
         {
-            return await _productService.GetAll(searchtext);
-        }
+            return await GetProducts(searchtext);
+        }        
 
         [HttpPost]
-        public async Task<Product> CreateProduct(Product product)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateRequest product)
         {
-            product.ThrowIfNull(nameof(product));
-            return await _productService.Insert(product);
+            var response = await _productService.InsertAsync(product);
+            return StatusCode(response.HttpStatusCode, response);
         }
 
+        #region private methods
 
+        private async Task<IActionResult> GetProducts(string searchtext = "")
+        {
+            if (await _featureManager.IsEnabledAsync(FeatureFlags.CacheEnabled.ToString()))
+            {
+                // Return data from cache, can be done using different techniques of caching
+            }
+
+            var response = await _productService.GetAllAsync(searchtext);
+            return StatusCode((int)HttpStatusCode.OK, response);
+        }
+
+        #endregion
     }
 }

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ShopBridge.Core.Entities.Catalog
+namespace ShopBridge.Core.DataModels.Catalog
 {
-    public class Product : BaseEntity
+    public class ProductModel
     {
+        public int Id { get; set; }        
         public string Name { get; set; }
         public string Description { get; set; }
         public string Details { get; set; }

@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using ShopBridge.Core.Entities.Catalog;
+using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Data.DbModels.Catalog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ShopBridge.Api.Configurations
 {
@@ -12,7 +8,8 @@ namespace ShopBridge.Api.Configurations
     {
         public AutoMapperConfigurations()
         {
-            CreateMap<Product, Products>().ReverseMap();
+            CreateMap<ProductCreateRequest, Product>().ReverseMap();
+            CreateMap<ProductModel, Product>().ReverseMap();
         }
     }
 }

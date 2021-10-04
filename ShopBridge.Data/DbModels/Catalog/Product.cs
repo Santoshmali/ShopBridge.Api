@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopBridge.Api.Models.Catalog
+namespace ShopBridge.Data.DbModels.Catalog
 {
-    public class ProductModel
+    public class Product : ModelBase
     {
-        public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Details { get; set; }

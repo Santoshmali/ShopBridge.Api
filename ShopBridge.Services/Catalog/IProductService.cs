@@ -1,19 +1,15 @@
-﻿using ShopBridge.Core.Entities.Catalog;
-using ShopBridge.Data;
+﻿using ShopBridge.Core.DataModels;
+using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Data.DbModels.Catalog;
-using ShopBridge.Data.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopBridge.Services.Catalog
 {
     public interface IProductService
     {
-        Task<Product> GetProductByProductId(int id);
-        Task<Product> Insert(Product product);
-        Task<List<Product>> GetAll(string searchtext = "");
+        Task<ServiceResponse<ProductModel>> GetProductByProductIdAsync(int id);
+        Task<ServiceResponse<ProductModel>> InsertAsync(ProductCreateRequest productCreateRequest);
+        Task<ServiceResponse<List<ProductModel>>> GetAllAsync(string searchtext = "");
     }
 }

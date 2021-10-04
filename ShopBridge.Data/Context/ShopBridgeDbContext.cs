@@ -12,7 +12,7 @@ namespace ShopBridge.Data.Context
         //{
         //}
 
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public ShopBridgeDbContext(DbContextOptions<ShopBridgeDbContext> options)
             : base(options)
@@ -21,8 +21,8 @@ namespace ShopBridge.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Products>().ToTable("ShopBridgeProduct");
-            modelBuilder.Entity<Products>().HasKey(x => x.Id);
+            modelBuilder.Entity<Product>().ToTable("ShopBridgeProduct");
+            modelBuilder.Entity<Product>().HasKey(x => x.Id);
 
             base.OnModelCreating(modelBuilder);
         }
