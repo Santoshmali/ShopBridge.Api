@@ -11,5 +11,7 @@ namespace ShopBridge.Services.Catalog
         Task<ServiceResponse<ProductModel>> GetProductByProductIdAsync(int id);
         Task<ServiceResponse<ProductModel>> InsertAsync(ProductCreateRequest productCreateRequest);
         Task<ServiceResponse<List<ProductModel>>> GetAllAsync(string searchtext = "");
+        Task<ServiceResponse<ProductModel>> UpdateAsync(ProductUpdateRequest productUpdateRequest);
+        Task<ServiceResponse<bool>> DeleteProductById(int id);
     }
 }

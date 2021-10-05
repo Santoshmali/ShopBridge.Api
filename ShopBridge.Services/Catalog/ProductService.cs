@@ -21,6 +21,21 @@ namespace ShopBridge.Services.Catalog
             _mapper = mapper.ThrowIfNull(nameof(mapper));
         }
 
+        public async Task<ServiceResponse<bool>> DeleteProductById(int id)
+        {
+            // Check if id is not null and present in db
+            var product = await _productRepository.GetProductByProductId(id);
+
+            if(product.IsNull())
+            {
+                return new ServiceResponse<bool>(HttpStatusCode.NotFound, false);
+            }
+
+            await _productRepository.Delete(product);
+
+            return new ServiceResponse<bool>(HttpStatusCode.OK, true);
+        }
+
         public async Task<ServiceResponse<List<ProductModel>>> GetAllAsync(string searchtext = "")
         {
             var product = await  _productRepository.GetAllAsync(searchtext);
@@ -45,8 +60,26 @@ namespace ShopBridge.Services.Catalog
             productCreateRequest.ThrowIfNull(nameof(productCreateRequest));
             var product = await _productRepository.Insert(_mapper.Map<Product>(productCreateRequest));
             var productModel = _mapper.Map<ProductModel>(product);
-
             return new ServiceResponse<ProductModel>(HttpStatusCode.OK, _mapper.Map<ProductModel>(productModel));
-        }        
+        }
+
+        public async Task<ServiceResponse<ProductModel>> UpdateAsync(ProductUpdateRequest productUpdateRequest)
+        {
+            productUpdateRequest.ThrowIfNull(nameof(productUpdateRequest));
+
+            // Check if id is not null and present in db
+            var product = await _productRepository.GetProductByProductId(productUpdateRequest.Id);
+
+            if (product.IsNull())
+            {
+                return new ServiceResponse<ProductModel>(HttpStatusCode.NotFound, null);
+            }
+
+            product = _mapper.Map(productUpdateRequest, product);
+
+            var updatedProduct = await _productRepository.Update(product);
+            var productModel = _mapper.Map<ProductModel>(updatedProduct);
+            return new ServiceResponse<ProductModel>(HttpStatusCode.OK, _mapper.Map<ProductModel>(productModel));
+        }
     }
 }

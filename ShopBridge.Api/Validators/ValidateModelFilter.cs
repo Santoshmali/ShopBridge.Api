@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using ShopBridge.Core.DataModels;
 
 namespace ShopBridge.Api.Validators
 {
@@ -11,7 +12,7 @@ namespace ShopBridge.Api.Validators
 
             if (!context.ModelState.IsValid)
             {
-                context.Result = new BadRequestObjectResult(context.ModelState);
+                context.Result = new BadRequestObjectResult(context.ModelState.Values);
             }
         }
     }

@@ -19,4 +19,12 @@ namespace ShopBridge.Core.DataModels
         public IEnumerable<Error> Errors { get; }
 
     }
+
+    public class ServiceResponse
+    {
+        public ServiceResponse(HttpStatusCode statusCode)
+        {
+
+        }
+    }
 }

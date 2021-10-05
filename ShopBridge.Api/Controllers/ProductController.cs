@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.FeatureManagement;
 using ShopBridge.Core;
 using ShopBridge.Core.DataModels.Catalog;
+using ShopBridge.Core.Extensions;
 using ShopBridge.Services.Catalog;
 using System.Net;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace ShopBridge.Api.Controllers
 
         public ProductController(IProductService productService, IFeatureManager featureManager)
         {
-            _productService = productService;
-            _featureManager = featureManager;
+            _productService = productService.ThrowIfNull(nameof(productService));
+            _featureManager = featureManager.ThrowIfNull(nameof(featureManager));
         }
 
         [HttpGet]
@@ -47,6 +48,21 @@ namespace ShopBridge.Api.Controllers
         public async Task<IActionResult> CreateProduct([FromBody] ProductCreateRequest product)
         {
             var response = await _productService.InsertAsync(product);
+            return StatusCode(response.HttpStatusCode, response);
+        }
+
+        [HttpDelete]
+        [Route("/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var response = await _productService.DeleteProductById(id);
+            return StatusCode(response.HttpStatusCode, response);
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductUpdateRequest product)
+        {
+            var response = await _productService.UpdateAsync(product);
             return StatusCode(response.HttpStatusCode, response);
         }
 

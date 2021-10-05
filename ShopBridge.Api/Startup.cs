@@ -48,9 +48,11 @@ namespace ShopBridge.Api
             // Services
             services.AddTransient<IProductService, ProductService>();
 
-            services.AddMvcCore(options => {
-                options.Filters.Add(typeof(ValidateModelFilter));
-            });
+            // For model validations
+            services.AddMvcCore()
+                .AddDataAnnotations()
+                .AddMvcOptions(opt =>
+                    opt.Filters.Add<ValidateModelFilter>());
 
             services.AddAutoMapper(typeof(AutoMapperConfigurations));
 
