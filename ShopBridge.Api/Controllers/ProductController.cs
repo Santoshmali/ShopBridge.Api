@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
 using ShopBridge.Core;
 using ShopBridge.Core.DataModels.Catalog;
@@ -16,11 +16,13 @@ namespace ShopBridge.Api.Controllers
     {
         private readonly IProductService _productService;
         private readonly IFeatureManager _featureManager;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductService productService, IFeatureManager featureManager)
+        public ProductController(IProductService productService, IFeatureManager featureManager, ILogger<ProductController> logger)
         {
             _productService = productService.ThrowIfNull(nameof(productService));
             _featureManager = featureManager.ThrowIfNull(nameof(featureManager));
+            _logger = logger.ThrowIfNull(nameof(logger));
         }
 
         [HttpGet]
@@ -73,8 +75,10 @@ namespace ShopBridge.Api.Controllers
             if (await _featureManager.IsEnabledAsync(FeatureFlags.CacheEnabled.ToString()))
             {
                 // Return data from cache, can be done using different techniques of caching
+                _logger.LogInformation("Cache is enabled, so reading data from cache service");
             }
 
+            _logger.LogInformation("Cache is disabled, so reading data from database.");
             var response = await _productService.GetAllAsync(searchtext);
             return StatusCode((int)HttpStatusCode.OK, response);
         }
