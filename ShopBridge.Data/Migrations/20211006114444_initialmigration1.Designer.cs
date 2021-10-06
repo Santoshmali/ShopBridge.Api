@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopBridge.Data.Context;
 
 namespace ShopBridge.Data.Migrations
 {
     [DbContext(typeof(ShopBridgeDbContext))]
-    partial class ShopBridgeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211006114444_initialmigration1")]
+    partial class initialmigration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

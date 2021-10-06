@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
 using ShopBridge.Core;
@@ -11,7 +12,8 @@ using System.Threading.Tasks;
 namespace ShopBridge.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Authorize]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -26,6 +28,7 @@ namespace ShopBridge.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("/{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -34,12 +37,14 @@ namespace ShopBridge.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             return await GetProducts();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("/search/{searchtext}")]
         public async Task<IActionResult> Search(string searchtext)
         {

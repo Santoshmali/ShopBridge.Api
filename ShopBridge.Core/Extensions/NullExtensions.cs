@@ -14,6 +14,14 @@ namespace ShopBridge.Core.Extensions
             return o == null;
         }
 
+        public static bool IsNullOrEmpty<T>([NotNull] this IEnumerable<T> enumerable)
+        {
+            if (enumerable == null)
+                return true;
+
+            return enumerable.Any();
+        }
+
         public static T ThrowIfNull<T>([NotNull] this T o, string parameter) where T : class
         {
             if (o == null)

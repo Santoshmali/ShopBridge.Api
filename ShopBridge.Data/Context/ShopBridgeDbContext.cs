@@ -1,18 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopBridge.Data.DbModels.Catalog;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using ShopBridge.Data.DbModels.Users;
 
 namespace ShopBridge.Data.Context
 {
     public class ShopBridgeDbContext : DbContext
     {
-        //public ShopBridgeDbContext()
-        //{
-        //}
-
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
 
         public ShopBridgeDbContext(DbContextOptions<ShopBridgeDbContext> options)
             : base(options)
@@ -24,12 +20,17 @@ namespace ShopBridge.Data.Context
             modelBuilder.Entity<Product>().ToTable("ShopBridgeProduct");
             modelBuilder.Entity<Product>().HasKey(x => x.Id);
 
+            modelBuilder.Entity<User>().ToTable("ShopBridgeUser");
+            modelBuilder.Entity<User>().HasKey(x => x.Id);
+            modelBuilder.Entity<User>().HasMany(x => x.RefreshTokens);
+
+            modelBuilder.Entity<UserRefreshToken>().ToTable("ShopBridgeUserRefreshToken");
+            modelBuilder.Entity<UserRefreshToken>().HasKey(x => x.Id);
+            modelBuilder.Entity<UserRefreshToken>().HasOne(x => x.User).WithMany(u => u.RefreshTokens).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserRefreshToken>().Ignore(x => x.IsActive);
+            modelBuilder.Entity<UserRefreshToken>().Ignore(x => x.IsExpired);
+
             base.OnModelCreating(modelBuilder);
         }
-
-        //public new DbSet<TEntity> Set<TEntity>() where TEntity : class
-        //{
-        //    return base.Set<TEntity>();
-        //}
     }
 }

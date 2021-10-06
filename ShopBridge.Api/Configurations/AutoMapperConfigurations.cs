@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ShopBridge.Core.DataModels.Catalog;
+using ShopBridge.Core.DataModels.Users;
 using ShopBridge.Data.DbModels.Catalog;
+using ShopBridge.Data.DbModels.Users;
 using System;
 
 namespace ShopBridge.Api.Configurations
@@ -17,6 +19,9 @@ namespace ShopBridge.Api.Configurations
 
             CreateMap<ProductUpdateRequest, Product>()
                 .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(src => DateTime.UtcNow));
+
+            CreateMap<UserModel, User>().ReverseMap();
+            CreateMap<RefreshToken, UserRefreshToken>().ReverseMap();
         }
     }
 }

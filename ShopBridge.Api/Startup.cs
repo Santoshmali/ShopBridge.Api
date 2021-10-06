@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using ShopBridge.Api.Configurations;
 using ShopBridge.Api.Middlewares;
 using ShopBridge.Api.Validators;
+using ShopBridge.Core.DataModels;
 using ShopBridge.Data.Catalog;
 using ShopBridge.Data.Context;
 using ShopBridge.Data.Repositories;
@@ -32,30 +34,12 @@ namespace ShopBridge.Api
             services.AddDbContext<ShopBridgeDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ShopBridgeConnectionString")));
             //services.AddDbContext<ShopBridgeDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
-            /*
-            AddTransient: Transient objects are always different; a new instance is provided to every controller and every service.
-            AddScoped: Scoped objects are the same within a request, but different across different requests.
-            AddSingleton: Singleton objects are the same for every object and every request. 
-            */
-            // Repositories
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<IProductRepository, ProductRepository>();
-
-            //
             services.AddFeatureManagement();
-
-            // Services
-            services.AddTransient<IProductService, ProductService>();
-
-            // For model validations
-            services.AddMvcCore()
-                .AddDataAnnotations()
-                .AddMvcOptions(opt =>
-                    opt.Filters.Add<ValidateModelFilter>());
-
-            services.AddAutoMapper(typeof(AutoMapperConfigurations));
-
+            services.AddShopBridgeServices(Configuration);
             services.AddControllers();
+
+            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShopBridge.Api", Version = "v1" });
@@ -74,6 +58,8 @@ namespace ShopBridge.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // global error handler
