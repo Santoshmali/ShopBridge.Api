@@ -13,4 +13,8 @@
     <ProjectReference Include="..\ShopBridge.Data\ShopBridge.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

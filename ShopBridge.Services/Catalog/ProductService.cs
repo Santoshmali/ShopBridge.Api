@@ -4,7 +4,9 @@ using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Core.Extensions;
 using ShopBridge.Data.Catalog;
 using ShopBridge.Data.DbModels.Catalog;
+using ShopBridge.Data.Pagination;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -36,11 +38,16 @@ namespace ShopBridge.Services.Catalog
             return new ServiceResponse<bool>(HttpStatusCode.OK, true);
         }
 
-        public async Task<ServiceResponse<List<ProductModel>>> GetAllAsync(string searchtext = "")
+        public async Task<ServiceResponse<PagedList<ProductModel>>> GetAllAsync(string searchtext, PaginationParameters parameters)
         {
-            var product = await  _productRepository.GetAllAsync(searchtext);
-            var productModelList =  _mapper.Map<List<ProductModel>>(product);
-            return new ServiceResponse<List<ProductModel>>(HttpStatusCode.OK, _mapper.Map<List<ProductModel>>(productModelList));
+            // Get DbModel
+            var product = _productRepository.GetAllAsync(searchtext, parameters);
+
+            //NOTE: Automapper is not allowing to having generic mapping so workaround is to preapre pagedlist one more time
+            // Data Model
+            var productModelList = new PagedList<ProductModel>(_mapper.Map<List<ProductModel>>(product.Rows), product.TotalCount, product.CurrentPage, product.PageSize);
+
+            return await Task.FromResult(new ServiceResponse<PagedList<ProductModel>>(HttpStatusCode.OK, productModelList));
         }
 
         public async Task<ServiceResponse<ProductModel>> GetProductByProductIdAsync(int id)

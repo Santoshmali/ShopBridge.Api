@@ -1,4 +1,5 @@
 ﻿using ShopBridge.Data.DbModels.Catalog;
+using ShopBridge.Data.Pagination;
 using ShopBridge.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace ShopBridge.Data.Catalog
     public interface IProductRepository : IRepository<Product>
     {
         Task<Product> GetProductByProductId(int id);
-        Task<List<Product>> GetAllAsync(string searchtext);
+        PagedList<Product> GetAllAsync(string searchtext, PaginationParameters parameters);
     }
 }

@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
+using Newtonsoft.Json;
 using ShopBridge.Core;
 using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Core.Extensions;
+using ShopBridge.Data.Pagination;
 using ShopBridge.Services.Catalog;
 using System.Net;
 using System.Threading.Tasks;
@@ -38,15 +40,15 @@ namespace ShopBridge.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParameters parameters)
         {
-            return await GetProducts();
+            return await GetProducts(parameters: parameters);
         }
 
         [HttpGet]
         [AllowAnonymous]
         [Route("/search/{searchtext}")]
-        public async Task<IActionResult> Search(string searchtext)
+        public async Task<IActionResult> Search(string searchtext, [FromQuery] PaginationParameters parameters)
         {
             return await GetProducts(searchtext);
         }        
@@ -75,7 +77,7 @@ namespace ShopBridge.Api.Controllers
 
         #region private methods
 
-        private async Task<IActionResult> GetProducts(string searchtext = "")
+        private async Task<IActionResult> GetProducts(string searchtext = "", PaginationParameters parameters = null)
         {
             if (await _featureManager.IsEnabledAsync(FeatureFlags.CacheEnabled.ToString()))
             {
@@ -84,7 +86,8 @@ namespace ShopBridge.Api.Controllers
             }
 
             _logger.LogInformation("Cache is disabled, so reading data from database.");
-            var response = await _productService.GetAllAsync(searchtext);
+            var response = await _productService.GetAllAsync(searchtext, parameters);
+
             return StatusCode((int)HttpStatusCode.OK, response);
         }
 

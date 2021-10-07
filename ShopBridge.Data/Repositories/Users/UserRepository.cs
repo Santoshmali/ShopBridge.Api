@@ -24,7 +24,7 @@ namespace ShopBridge.Data.Repositories.Users
 
         public async Task<User> GetUserByUserRefreshToken(string refreshToken)
         {
-            return  await this.Table.SingleOrDefaultAsync(x => x.RefreshTokens.Any(r => r.Token == refreshToken));
+            return  await this.Table.Include(x=>x.RefreshTokens).SingleOrDefaultAsync(x => x.RefreshTokens.Any(r => r.Token == refreshToken));
         }
     }
 }

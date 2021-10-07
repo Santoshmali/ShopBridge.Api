@@ -9,6 +9,6 @@ namespace ShopBridge.Data.DbModels.Users
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public virtual IList<UserRefreshToken> RefreshTokens { get; set; }
+        public IList<UserRefreshToken> RefreshTokens { get; set; }
     }
 }

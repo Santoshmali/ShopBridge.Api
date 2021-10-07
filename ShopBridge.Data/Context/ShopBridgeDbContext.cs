@@ -26,7 +26,7 @@ namespace ShopBridge.Data.Context
 
             modelBuilder.Entity<UserRefreshToken>().ToTable("ShopBridgeUserRefreshToken");
             modelBuilder.Entity<UserRefreshToken>().HasKey(x => x.Id);
-            modelBuilder.Entity<UserRefreshToken>().HasOne(x => x.User).WithMany(u => u.RefreshTokens).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserRefreshToken>().HasOne(x => x.User).WithMany(u => u.RefreshTokens).HasForeignKey(x=>x.UserId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<UserRefreshToken>().Ignore(x => x.IsActive);
             modelBuilder.Entity<UserRefreshToken>().Ignore(x => x.IsExpired);
 

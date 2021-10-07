@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShopBridge.Data.DbModels.Users
@@ -12,10 +14,11 @@ namespace ShopBridge.Data.DbModels.Users
         public DateTime? Revoked { get; set; }
         public string RevokedByIp { get; set; }
         public string ReplacedByToken { get; set; }
-        public int UserId { get; set; }
+        
 
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
         [NotMapped]
         public bool IsExpired => DateTime.UtcNow >= Expires;

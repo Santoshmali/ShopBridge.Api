@@ -16,7 +16,6 @@ namespace ShopBridge.Api.Configurations
                 .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(src => DateTime.UtcNow));
 
             CreateMap<ProductModel, Product>().ReverseMap();
-
             CreateMap<ProductUpdateRequest, Product>()
                 .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(src => DateTime.UtcNow));
 
