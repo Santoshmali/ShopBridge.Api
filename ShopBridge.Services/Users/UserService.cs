@@ -31,6 +31,8 @@ namespace ShopBridge.Services.Users
         }
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model, string ipAddress)
         {
+            model.ThrowIfNull(nameof(model));
+
             var user = await _userRepository.Authenticate(model.Username, model.Password);
 
             // return null if user not found
