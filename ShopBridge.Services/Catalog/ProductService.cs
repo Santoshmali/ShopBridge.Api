@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using ShopBridge.Core.DataModels;
 using ShopBridge.Core.DataModels.Catalog;
 using ShopBridge.Core.Extensions;
@@ -16,11 +17,13 @@ namespace ShopBridge.Services.Catalog
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IOptions<AppSettings> _appSettings;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _productRepository = productRepository.ThrowIfNull(nameof(productRepository));
             _mapper = mapper.ThrowIfNull(nameof(mapper));
+            _appSettings = appSettings.ThrowIfNull(nameof(appSettings));
         }
 
         public async Task<ServiceResponse<bool>> DeleteProductById(int id)
@@ -40,6 +43,9 @@ namespace ShopBridge.Services.Catalog
 
         public async Task<ServiceResponse<PagedList<ProductModel>>> GetAllAsync(string searchtext, PaginationParameters parameters)
         {
+            parameters.PageSize = (parameters.PageSize == 0) ? _appSettings.Value.DefaultPageSize : parameters.PageSize;
+            parameters.PageNumber = (parameters.PageNumber == 0) ? 1 : parameters.PageNumber;
+
             // Get DbModel
             var product = _productRepository.GetAllAsync(searchtext, parameters);
 
