@@ -23,6 +23,53 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Angular", "Presentation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.React", "Presentation\Web.React\Web.React.csproj", "{EB9C23AF-E4B0-48A2-B69F-64DCCC058E71}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "angular-ui", "angular-ui", "{E97F8305-081D-417E-9AE6-033A8B7BBC64}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\.browserslistrc = Presentation\angular-ui\.browserslistrc
+		Presentation\angular-ui\.editorconfig = Presentation\angular-ui\.editorconfig
+		Presentation\angular-ui\.gitignore = Presentation\angular-ui\.gitignore
+		Presentation\angular-ui\angular.json = Presentation\angular-ui\angular.json
+		Presentation\angular-ui\karma.conf.js = Presentation\angular-ui\karma.conf.js
+		Presentation\angular-ui\package-lock.json = Presentation\angular-ui\package-lock.json
+		Presentation\angular-ui\package.json = Presentation\angular-ui\package.json
+		Presentation\angular-ui\README.md = Presentation\angular-ui\README.md
+		Presentation\angular-ui\tsconfig.app.json = Presentation\angular-ui\tsconfig.app.json
+		Presentation\angular-ui\tsconfig.json = Presentation\angular-ui\tsconfig.json
+		Presentation\angular-ui\tsconfig.spec.json = Presentation\angular-ui\tsconfig.spec.json
+		Presentation\angular-ui\tslint.json = Presentation\angular-ui\tslint.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\favicon.ico = Presentation\angular-ui\src\favicon.ico
+		Presentation\angular-ui\src\index.html = Presentation\angular-ui\src\index.html
+		Presentation\angular-ui\src\main.ts = Presentation\angular-ui\src\main.ts
+		Presentation\angular-ui\src\polyfills.ts = Presentation\angular-ui\src\polyfills.ts
+		Presentation\angular-ui\src\styles.css = Presentation\angular-ui\src\styles.css
+		Presentation\angular-ui\src\test.ts = Presentation\angular-ui\src\test.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\app-routing.module.ts = Presentation\angular-ui\src\app\app-routing.module.ts
+		Presentation\angular-ui\src\app\app.component.css = Presentation\angular-ui\src\app\app.component.css
+		Presentation\angular-ui\src\app\app.component.html = Presentation\angular-ui\src\app\app.component.html
+		Presentation\angular-ui\src\app\app.component.spec.ts = Presentation\angular-ui\src\app\app.component.spec.ts
+		Presentation\angular-ui\src\app\app.component.ts = Presentation\angular-ui\src\app\app.component.ts
+		Presentation\angular-ui\src\app\app.module.ts = Presentation\angular-ui\src\app\app.module.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{25110D23-8B87-4152-AD73-4384B9B5BD7D}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\assets\.gitkeep = Presentation\angular-ui\src\assets\.gitkeep
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "environments", "environments", "{38E62414-2639-467B-892C-ED00879ED9DA}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\environments\environment.prod.ts = Presentation\angular-ui\src\environments\environment.prod.ts
+		Presentation\angular-ui\src\environments\environment.ts = Presentation\angular-ui\src\environments\environment.ts
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +115,11 @@ Global
 		{D9EB5ECB-F2E4-4CA9-8ED2-48978A41DC11} = {A5B0162F-1D99-4A5E-96FE-F9F46C4AA4AC}
 		{F60D50D2-0959-4583-B849-EDBB4FF31CA7} = {A5C67DC2-5B35-4F72-9326-9E25F886DD13}
 		{EB9C23AF-E4B0-48A2-B69F-64DCCC058E71} = {A5C67DC2-5B35-4F72-9326-9E25F886DD13}
+		{E97F8305-081D-417E-9AE6-033A8B7BBC64} = {A5C67DC2-5B35-4F72-9326-9E25F886DD13}
+		{A37CEF33-E9DD-4FB3-9515-196BDEEA8F23} = {E97F8305-081D-417E-9AE6-033A8B7BBC64}
+		{4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
+		{25110D23-8B87-4152-AD73-4384B9B5BD7D} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
+		{38E62414-2639-467B-892C-ED00879ED9DA} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6964FBE-194F-49ED-883D-E48614D221F8}
