@@ -1,0 +1,46 @@
+
+
+1. Created project with command "ng new angular-ui"
+2. Created component home and login using command "ng generate component home" //https://angular.io/cli/generate
+	- It generated 4 files inside 
+			- css (home.component.css)
+			- html (home.component.html)
+			- typescript (home.component.ts)
+			- test file (home.component.spec.ts)
+	- Important Points:
+		- import keyword used to import "class, interface, etc" from specified file
+
+3. Created service user and authentication using command "ng generate service user"
+	- It generated 2 files
+			- user.service.ts
+			- user.service.spec.ts
+	- Importan Points: 
+		- "Injectable" describes that the class as one that participates in the dependency injection system
+4. "package-lock.json"
+	-	package-lock. json is automatically generated for any operations where npm modifies either the node_modules tree, or package. json . 
+		It describes the exact tree that was generated, 
+		such that subsequent installs are able to generate identical trees, regardless of intermediate dependency updates
+5. "tslint.json"
+	-	TSLint is an extensible static analysis tool that checks TypeScript code for readability, maintainability, and 
+		functionality errors. It is widely supported across modern editors & build systems and can be customized with 
+		your own lint rules, configurations, and formatters.
+6. "tsconfig.json"
+	-	The presence of a tsconfig.json file in a directory indicates that the directory is the root of a TypeScript project. 
+		The tsconfig.json file specifies the root files and the compiler options required to compile the project.
+7. "tsconfig.app.json"
+	-	The Angular CLI generates a tsconfig.app.json file which is used to build an application, 
+		in which the types compiler option is set to [] to disable automatic inclusion of declarations from @types/*.
+8. "package.json"
+	-	package.json contains all the information of your web app.It contains all the metadata{set of data which describes and gives info about all other data}
+		The package.json is organized into two groups of packages:
+			-	Dependencies: are essential to running applications.
+			-	DevDependencies: are only necessary to develop applications.
+	-	"scripts"
+		The "scripts" property of your package.json file supports a number of built-in scripts and their preset life cycle events
+		as well as arbitrary scripts. These all can be executed by running npm run-script <stage> or npm run <stage> for short. 
+		Pre and post commands with matching names will be run for those as well (e.g. premyscript, myscript, postmyscript). 
+		Scripts from dependencies can be run with npm explore <pkg> -- npm run <stage>
+9. "angular.json"
+	-	A file named angular. json at the root level of an Angular workspace provides workspace-wide and 
+		project-specific configuration defaults for build and development tools provided by the Angular CLI. 
+		Path values given in the configuration are relative to the root workspace folder.

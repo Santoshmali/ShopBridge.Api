@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBridge.Tests", "ShopBri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A5C67DC2-5B35-4F72-9326-9E25F886DD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Angular", "Presentation\Web.Angular\Web.Angular.csproj", "{F60D50D2-0959-4583-B849-EDBB4FF31CA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Angular", "Presentation\Web.Angular\Web.Angular.csproj", "{F60D50D2-0959-4583-B849-EDBB4FF31CA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.React", "Presentation\Web.React\Web.React.csproj", "{EB9C23AF-E4B0-48A2-B69F-64DCCC058E71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.React", "Presentation\Web.React\Web.React.csproj", "{EB9C23AF-E4B0-48A2-B69F-64DCCC058E71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "angular-ui", "angular-ui", "{E97F8305-081D-417E-9AE6-033A8B7BBC64}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "angular-ui", "angular-ui", 
 		Presentation\angular-ui\.gitignore = Presentation\angular-ui\.gitignore
 		Presentation\angular-ui\angular.json = Presentation\angular-ui\angular.json
 		Presentation\angular-ui\karma.conf.js = Presentation\angular-ui\karma.conf.js
+		Notes.txt = Notes.txt
 		Presentation\angular-ui\package-lock.json = Presentation\angular-ui\package-lock.json
 		Presentation\angular-ui\package.json = Presentation\angular-ui\package.json
 		Presentation\angular-ui\README.md = Presentation\angular-ui\README.md
@@ -68,6 +69,48 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "environments", "environment
 	ProjectSection(SolutionItems) = preProject
 		Presentation\angular-ui\src\environments\environment.prod.ts = Presentation\angular-ui\src\environments\environment.prod.ts
 		Presentation\angular-ui\src\environments\environment.ts = Presentation\angular-ui\src\environments\environment.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "login", "login", "{B810E60C-3BA8-4D5B-91D1-C6EE4344F77E}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\login\index.ts = Presentation\angular-ui\src\app\login\index.ts
+		Presentation\angular-ui\src\app\login\login.component.css = Presentation\angular-ui\src\app\login\login.component.css
+		Presentation\angular-ui\src\app\login\login.component.html = Presentation\angular-ui\src\app\login\login.component.html
+		Presentation\angular-ui\src\app\login\login.component.spec.ts = Presentation\angular-ui\src\app\login\login.component.spec.ts
+		Presentation\angular-ui\src\app\login\login.component.ts = Presentation\angular-ui\src\app\login\login.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "home", "home", "{07263482-13A3-4B35-B7A5-01F274A29F63}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\home\home.component.css = Presentation\angular-ui\src\app\home\home.component.css
+		Presentation\angular-ui\src\app\home\home.component.html = Presentation\angular-ui\src\app\home\home.component.html
+		Presentation\angular-ui\src\app\home\home.component.spec.ts = Presentation\angular-ui\src\app\home\home.component.spec.ts
+		Presentation\angular-ui\src\app\home\home.component.ts = Presentation\angular-ui\src\app\home\home.component.ts
+		Presentation\angular-ui\src\app\home\index.ts = Presentation\angular-ui\src\app\home\index.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_helpers", "_helpers", "{B785E8D7-017C-4B17-909D-B3C6C6F66721}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\_helpers\auth.guard.ts = Presentation\angular-ui\src\app\_helpers\auth.guard.ts
+		Presentation\angular-ui\src\app\_helpers\error.interceptor.ts = Presentation\angular-ui\src\app\_helpers\error.interceptor.ts
+		Presentation\angular-ui\src\app\_helpers\fake-backend.ts = Presentation\angular-ui\src\app\_helpers\fake-backend.ts
+		Presentation\angular-ui\src\app\_helpers\index.ts = Presentation\angular-ui\src\app\_helpers\index.ts
+		Presentation\angular-ui\src\app\_helpers\jwt.interceptor.ts = Presentation\angular-ui\src\app\_helpers\jwt.interceptor.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_models", "_models", "{AA10014D-7EAB-47BA-8374-C5DA79F32F95}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\_models\index.ts = Presentation\angular-ui\src\app\_models\index.ts
+		Presentation\angular-ui\src\app\_models\user.ts = Presentation\angular-ui\src\app\_models\user.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_services", "_services", "{DEEB72B1-1C68-41E5-94FB-0807F6839B2A}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation\angular-ui\src\app\_services\authentication.service.spec.ts = Presentation\angular-ui\src\app\_services\authentication.service.spec.ts
+		Presentation\angular-ui\src\app\_services\authentication.service.ts = Presentation\angular-ui\src\app\_services\authentication.service.ts
+		Presentation\angular-ui\src\app\_services\index.ts = Presentation\angular-ui\src\app\_services\index.ts
+		Presentation\angular-ui\src\app\_services\user.service.spec.ts = Presentation\angular-ui\src\app\_services\user.service.spec.ts
+		Presentation\angular-ui\src\app\_services\user.service.ts = Presentation\angular-ui\src\app\_services\user.service.ts
 	EndProjectSection
 EndProject
 Global
@@ -120,6 +163,11 @@ Global
 		{4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
 		{25110D23-8B87-4152-AD73-4384B9B5BD7D} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
 		{38E62414-2639-467B-892C-ED00879ED9DA} = {A37CEF33-E9DD-4FB3-9515-196BDEEA8F23}
+		{B810E60C-3BA8-4D5B-91D1-C6EE4344F77E} = {4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}
+		{07263482-13A3-4B35-B7A5-01F274A29F63} = {4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}
+		{B785E8D7-017C-4B17-909D-B3C6C6F66721} = {4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}
+		{AA10014D-7EAB-47BA-8374-C5DA79F32F95} = {4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}
+		{DEEB72B1-1C68-41E5-94FB-0807F6839B2A} = {4763A9EF-C7DE-4B93-BBE7-2BAE0A2F4D7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6964FBE-194F-49ED-883D-E48614D221F8}

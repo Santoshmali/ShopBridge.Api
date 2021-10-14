@@ -38,8 +38,6 @@ namespace ShopBridge.Api
             services.AddShopBridgeServices(Configuration);
             services.AddControllers();
 
-            
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShopBridge.Api", Version = "v1" });
@@ -58,6 +56,9 @@ namespace ShopBridge.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            //app.UseCors(builder => builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();
